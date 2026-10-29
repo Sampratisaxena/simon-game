@@ -4,7 +4,7 @@ var userClickedPattern=[];
 
 //when user clicks make sound
 function playSound(name){
-    var audio =new Audio("sound/"+name+".mp3");
+    var audio =new Audio("sounds/"+name+".mp3");
     audio.play();
 }
 // build array of patern user has to follow(gamePattern)
@@ -26,6 +26,7 @@ function nextSequence(){
 // build array of user clicked color
 var lastIndex=0;
 $(".btn").click(function(){
+    if (!started) return;
     var userChosenColour= this.id;
     userClickedPattern.push(userChosenColour);
     playSound(userChosenColour);
@@ -34,19 +35,28 @@ $(".btn").click(function(){
     checkAnswer(lastIndex)
 });
 
-function animatePress(currentColour){
-    $("."+currentColour).addClass("pressed");
-    setTimeout(function(){
-        $("."+currentColour).removeClass("pressed")
-    },100)
+function animatePress(currentColour) {
+    $("#" + currentColour).addClass("pressed");
+    setTimeout(function() {
+        $("#" + currentColour).removeClass("pressed");
+    }, 100);
 }
 
-var started=false;
-$(document).on('keydown', function(event) {
-    if (!started){
+var started = false;
+
+function startGame() {
+    if (!started) {
         started = true;
         nextSequence();
     }
+}
+
+$(document).on("keydown", function() {
+    startGame();
+});
+
+$("#level-title").on("click", function() {
+    startGame();
 });
 
 function checkAnswer(currentLevel){
@@ -66,7 +76,7 @@ function checkAnswer(currentLevel){
         setTimeout(function(){
             $("body").removeClass("game-over")
         },200)
-        $("#level-title").text("Game Over, Press Any Key to Restart");
+        $("#level-title").text("Game Over, Tap or Press Any Key to Restart");
         startOver();
     }
 }
