@@ -51,3 +51,32 @@ body {
   box-shadow: 0 0 20px white;
   background-color: grey;
 }
+
+/* Mobile-friendly design */
+@media (max-width: 600px) {
+    #level-title {
+        font-size: 1.4rem;
+        line-height: 1.5;
+        margin: 30px 10px;
+    }
+
+    .container {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .btn {
+        width: 35vw;
+        height: 35vw;
+        max-width: 150px;
+        max-height: 150px;
+        margin: 0;
+        border-width: 7px;
+        box-sizing: border-box;
+        touch-action: manipulation;
+    }
+}
